@@ -1,0 +1,187 @@
+<div class="nav-bar-container">
+
+		<!-- BEGIN ICONS -->
+		<div class="nav-menu">
+			<div class="hamburger">
+				<span class="patty"></span>
+				<span class="patty"></span>
+				<span class="patty"></span>
+				<span class="patty"></span>
+				<span class="patty"></span>
+				<span class="patty"></span>
+			</div><!--.hamburger-->
+		</div><!--.nav-menu-->
+
+		
+
+		<div class="nav-user"><% if author_signed_in?%>
+			<div class="user">
+				<%= image_tag current_author.photo.url(:nano)%>
+
+				
+			</div><!--.user--><%end%>
+
+			<div class="cross">
+				<span class="line"></span>
+				<span class="line"></span>
+			</div><!--.cross-->
+		</div><!--.nav-user-->
+		<!-- END OF ICONS -->
+
+		<div class="nav-bar-border"></div><!--.nav-bar-border-->
+		<!-- BEGIN OVERLAY HELPERS -->
+		<div class="overlay">
+			<div class="starting-point">
+				<span></span>
+			</div><!--.starting-point-->
+			<div class="logo">POPLOGGER</div><!--.logo-->
+		</div><!--.overlay-->
+
+		<div class="overlay-secondary"></div><!--.overlay-secondary-->
+
+		<!-- END OF OVERLAY HELPERS -->
+		<!-- BEGIN MENU LAYER -->
+    <div class="menu-layer">
+      <ul>
+        <li data-open-after="true">
+          <a href="/articles">HOME</a>
+        </li>
+
+        
+        <% if author_signed_in?%>
+        <li>
+          <a href="/authors/edit">PROFILE</a>
+          
+        </li>
+        <li>
+          <a href="/articles/new">CREATE ARTICLE</a>
+          
+        </li>
+       
+       <%else%>
+       <li>
+          <a href="/authors/sign_up">SIGN UP</a>
+          
+        </li>
+        <li>
+          <a href="/authors/sign_in">LOGIN</a>
+          
+        </li><%end%>
+      </ul>
+    </div><!--.menu-layer-->
+    <!-- END OF MENU LAYER -->
+
+    
+
+    <!-- BEGIN USER LAYER -->
+    <div class="user-layer">
+      <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="active"><a href="#messages" data-toggle="tab" style="color:black">MY PROFILE</a></li>
+        <li><a href="#notifications" data-toggle="tab" style="color:black">MY ARTICLES </a></li>
+        <li><a href="#settings" data-toggle="tab" style="color:black">EDIT PROFILE</a></li>
+      </ul>
+
+      <div class="row no-gutters tab-content">
+
+        <div class="tab-pane fade in active" id="messages">
+        
+          <div class="col-md-12">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="page-header full-content parallax" style="height: 600px; overflow: hidden">
+			<div class="parallax-bg" style="background: url('/assets/picjumbo/large/24.jpg') 50% 50%; background-size: cover; width: 100%; height: 100%; position: absolute; left: 0; top: 0;">
+			</div>
+
+			<div class="profile-info">
+				<div class="profile-photo"><% if author_signed_in?%>
+					<%= image_tag current_author.photo.url(:circle)%><%end%>
+				</div><!--.profile-photo-->
+				<div class="profile-text light">
+					Tolga Ergin
+					<span class="caption">Web Developer</span>
+				</div><!--.profile-text-->
+			</div><!--.profile-info-->
+
+			<div class="row">
+				<div class="col-sm-6">
+				<% if author_signed_in?%>
+					<h1>User Profile <small><%current_author.name%></small></h1>
+				<%end%>
+				</div><!--.col-->
+				<div class="col-sm-6">
+					<ol class="breadcrumb">
+						<li><a href="#"><i class="ion-home"></i></a></li>
+						<li><a href="#">Pages</a></li>
+						<li><a href="#" class="active">User Profile</a></li>
+					</ol>
+				</div><!--.col-->
+			</div><!--.row--></div></div></div></div>
+
+			
+
+        <div class="tab-pane fade" id="notifications">
+
+          <div class="col-md-8 col-md-offset-2">
+<% if author_signed_in?%>
+      <%current_author.articles.reverse_each do |article|%>
+        <div class="card card-event">
+          <div class="card-heading">
+          <%= image_tag article.photo.url(:medium), class: "img-responsive", style: "width:100%" %>
+          </div><!--.card-heading-->
+
+          <div class="card-body">
+            <div class="calendar">
+              <div class="month"><%=l article.created_at, :format => :sample%></div>
+              <div class="date"><%=l article.created_at, :format => :sample1%></div>
+            </div><!--.calendar-->
+            <h4><%= link_to article.title, article_path(article)%></h4>
+            <p><%= truncate article.body, length: 260 %></p>
+          </div><!--.card-body-->
+
+          <div class="card-footer">
+            
+            <button type="button" class="btn btn-sm btn-green btn-flat pull-right"><%= link_to 'READ', article_path(article)%></button>
+          </div><!--.card-footer-->
+        </div><!--.card-->
+        <%end%>
+<!--.col--><%end%>
+          </div>
+        </div><!--.tab-pane #notifications-->
+
+        <div class="tab-pane fade" id="settings">
+          <div class="col-md-6 col-md-offset-3">
+
+            <%=render "/devise/registrations/edit"%>
+
+          </div><!--.col-->
+        </div><!--.tab-pane #settings-->
+
+      </div><!--.row-->
+    </div><!--.user-layer-->
+    <!-- END OF USER LAYER -->
+</div>
+	<!--.nav-bar-container-->
+
+	<div class="content">
+
+		<div class="page-header full-content xyz">
+			<div class="row">
+				<div class="col-sm-6 medi">
+					<h1><a href="/articles">POPLOGGER</a></h1>
+				</div><!--.col-->
+				<div class="col-sm-6 medica">
+					<ol class="breadcrumb" style="color:white">
+						
+						<% if author_signed_in?%>
+						<li><a href="/articles" > Home</a></li>
+						<li><a href="/articles/new" style="margin-left: 10px"> Create Article</a></li>
+						<li><a href="/authors/sign_out" data-method="delete" style="margin-left: 10px"> Sign Out</a></li>
+						<%else%>
+						<li><a href="/articles" style="margin-left: 10px"> Home</a></li>
+						<li><a href="/authors/sign_up" style="margin-left: 10px"> SIGN UP</a></li>
+						<li><a href="" data-toggle="modal" data-target="#myModal" style="margin-left: 10px"> SIGN IN</a></li>
+						<%end%>
+					</ol>
+				</div><!--.col-->
+			</div><!--.row-->
+		</div><!--.page-header-->
+</div>

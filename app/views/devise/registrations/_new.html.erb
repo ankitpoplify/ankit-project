@@ -1,0 +1,44 @@
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="form-group">
+            <div class="inputer inputer-teal floating-label">
+              <div class="input-wrapper">
+ <%= f.email_field :email, :class =>"form-control"%>
+  <label><%= f.label :email %></label>
+  </div></div></div>
+
+  <div class="form-group">
+            <div class="inputer inputer-teal floating-label">
+              <div class="input-wrapper">
+    
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "off",:class =>"form-control", :required => true%>
+    <label><%= f.label :password%></label>
+  </div></div></div>
+
+  <div class="form-group">
+            <div class="inputer inputer-teal floating-label">
+              <div class="input-wrapper">
+   
+    <%= f.password_field :password_confirmation, autocomplete: "off", :class =>"form-control" %>
+     <%= f.label :password_confirmation, "Confirm password" %>
+  </div></div></div>
+  
+   <div class="col-md-12 col-xs-12" style="padding-left:0px;">
+    
+                  <%= f.submit "Sign Up", :class =>"btn btn-teal pull-left"  %>
+              </div>
+  <% end %>
+
+
+
+
+
+
+
+
+

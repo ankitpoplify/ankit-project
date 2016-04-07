@@ -1,0 +1,94 @@
+
+
+
+
+ 
+
+
+
+ <div class="content">
+
+ 
+
+
+    <div class="row">
+     <div class="col-md-12">
+       <div class="panel">
+         <div class="panel-heading">
+         
+         </div><!--.panel-heading-->
+         <div class="panel-body">
+         <%= form_for(@article) do |f| %>
+          <% if @article.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+     <ul>
+     <% @article.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+     <% end %>
+     </ul>
+   </div>
+ <% end %>
+
+           <div class="row example-row">
+             <div class="col-md-3">Title</div><!--.col-md-3-->
+             <div class="col-md-9">
+
+              <%=f.text_field :title,:class=>'form-control',:placeholder=>'Title'%>
+             <br>
+
+             </div><!--.col-md-9-->
+             <div class="col-md-3">Description</div><!--.col-md-3-->
+             <div class="col-md-9">
+              <%=f.text_area :body,:class=>'form-control wysihtml5-editor bs-wysihtml5',:placeholder=>'Description'%>
+              <br>
+             </div><!--.col-md-9-->
+              <div class="col-md-3">Tags</div><!--.col-md-3-->
+             <div class="col-md-9">
+
+              <%=f.text_field :tag_list, :class=>'form-control',:placeholder=>'Tags'%>
+             
+             
+
+             </div></br><!--.col-md-9-->
+              <div class="col-md-3">Image</div><!--.col-md-3-->
+             <div class="col-md-9">
+
+              <%=f.file_field  :photo%>
+             <br>
+             
+             </div><!--.col-md-9-->
+             <div class="col-md-3"></div><!--.col-md-3-->
+             <div class="col-md-9">
+
+              <%=f.submit :class=>'btn btn-success'%>
+             <br>
+
+             </div><!--.col-md-9-->
+           </div><!--.row-->
+
+         </div><!--.panel-body-->
+       </div><!--.panel-->
+       <%end%>
+     </div><!--.col-md-12-->
+   </div><!--.row-->
+
+   <div class="footer-links margin-top-40">
+     <div class="row no-gutters bg-blue jj">
+    
+     </div><!--.row-->
+   </div><!--.footer-links-->
+
+ </div><!--.content-->
+
+
+<script type="text/javascript">
+  
+$("#article_tag_list").tagsinput();
+</script>
+
+
+
+
+ 

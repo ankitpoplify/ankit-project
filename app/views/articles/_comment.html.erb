@@ -1,0 +1,24 @@
+<div class="comment">
+<div class="col-md-1 user-photo"><%=image_tag comment.author.photo.url(:circle), style: "border-radius: 50%;"%></div>
+
+<ul class="inline-list dot-seperator">
+<li><a href="#"><%= comment.author_name %></a></li>
+									<li class="small"><%=l comment.created_at, :format => :sample%></li>
+								</ul>
+  
+  
+
+
+
+
+<div class="comment-body">
+							
+							
+								
+									
+								<p style="padding-left:5px"><%= comment.body %></p>
+								<div class="comment-footer">
+									
+								</div><!--.comment-footer-->
+							</div><!--.comment-body-->
+						</div><!--.comment-->

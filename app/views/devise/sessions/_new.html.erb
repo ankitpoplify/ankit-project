@@ -1,0 +1,46 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel" style="text-align:center">WELCOME BACK</h4>
+         </div>
+         <div class="modal-body">
+            
+            
+               
+               
+                  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <div class="field" style="margin:21px 0px 15px">
+                     <%= f.email_field :email, :autofocus => true, placeholder: ' abc@mail.com',:required => true%>
+                  </div>
+                  <div class="field" style="margin:0px 0px 15px">
+                     <%= f.password_field :password, autocomplete: "off", placeholder: 'Password',:required => true%>
+                  </div>
+                  <% if devise_mapping.rememberable? -%>
+                  <div class="field col-md-8 col-xs-12" style=" font-size:12px;">
+                     <%= f.check_box :remember_me %>
+                     <%= f.label :remember_me %></div>
+                  
+               <div class="field col-md-8 col-xs-12" style=" font-size:12px;">   
+               <%= render 'devise/shared/link1'%>
+            </div>
+                  <div class="actions col-md-8">
+                 
+                  <%= f.submit "Log in", :class=>'btn btn-success col-md-8'%>
+               </div>
+                  <% end %>
+               </div>
+               
+              
+               
+            </div>
+            
+         </div>
+         
+      </div>
+      
+         <% end %>
+        
+   </div>
+</div>

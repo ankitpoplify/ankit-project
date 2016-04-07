@@ -1,0 +1,34 @@
+
+
+   
+        
+<%= form_for [ @article, @comment ] do |f| %>
+
+          
+
+
+  <% if author_signed_in? %>
+<%= f.hidden_field :author_name, :value => current_author.name%>
+    
+   
+    <%else%><p>
+    <%= f.label :author_name,"Your Name"%><br/>
+    <%= f.text_field :author_name %><%end%>
+  </p>
+  <p>
+  
+    <%= f.text_area :body, class: "form-control js-auto-size", placeholder: "Join the discussion" %>
+  </p>
+  
+  <span>
+    <%= f.submit 'Submit',:class=>'btn btn-success', :style =>'margin-bottom: 15px;' %>
+   </span>
+<% end %>
+
+
+
+                          
+              
+                 
+                
+           

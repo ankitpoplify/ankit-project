@@ -1,0 +1,95 @@
+
+<div class="col-md-7 col-xs-12" style="margin-right: 90px;">
+
+
+
+<div class="card card-event">
+
+					<div class="card-heading bg-image">
+					<h4 style="margin-left: 10px;
+    margin-top: 10px;"><%= @article.title%><% if author_signed_in?%>
+<%if @article.author.id == current_author.id%>
+<%= link_to 'Edit', edit_article_path(@article), :style => "font-size:13px" %>
+<%end%> <%end%></h4>
+					<%= image_tag @article.photo.url(:medium), style: "width:100%"%>
+					</div><!--.card-heading-->
+
+					<div class="card-body">
+						<div class="calendar">
+							<div class="month"><%= l @article.created_at, :format => :sample %></div>
+							<div class="date" style="font-size:14px;"><%= l @article.created_at, :format => :sample1 %></div>
+						</div><!--.calendar-->
+						
+						<p style="font-size:13px; margin-top:10px;"><%=@article.body%></p>
+						<p><% @article.tags.each do |tag| %>
+    <i class="fa fa-tags"></i>&nbsp;:&nbsp;<%= link_to tag.name, tag_path(tag) %>
+  <% end %>
+</p>
+					</div><!--.card-body-->
+
+					
+				</div><!--.card-->
+
+
+ 
+  
+<% if author_signed_in?%>
+<h3>Comments (<%= @article.comments.size %>)</h3>
+<%= render partial: 'articles/comment', collection: @article.comments %>
+<%= render partial: 'Comments/form' %>
+<%end%>
+
+
+
+
+				
+			</div><!--.col-md-8-->
+			<div class="col-md-4">
+				<div class="card card-user card-user-red">
+					<div class="card-heading heading-center text-color-white" style="background-color: #3e50b4">
+						
+							<%= image_tag @article.author.photo.url(:circle), class: "user-image"%>
+						
+						<h3 class="card-title"><a href="#"><%=@article.author.name%></a></h3>
+					</div><!--.card-heading-->
+
+					<div class="card-body">
+						<p>I'm Mariana, a front-end developer from Brazil &amp; currently working on Sety, T-Project and <a href="#" style="color: #3e50b4">POPLOGGER</a>.</p>
+						<ul class="social-links">
+							<li><a href="#" style="color: #3e50b4"><i class="fa fa-github"></i></a></li>
+							<li><a href="#" style="color: #3e50b4"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#" style="color: #3e50b4"><i class="fa fa-linkedin"></i></a></li>
+						</ul>
+					</div><!--.card-body-->
+
+					<div class="card-footer">
+						
+						<button class="btn btn-xs btn-red pull-right" style="background-color: #3e50b4; border: none;"><%= link_to "View Profile",profile_path(@article.author_id), style: "color:white; border-color:none;"%></button>
+					</div><!--.card-footer-->
+
+				</div><!--.card-->
+			</div><!--.col-md-4-->
+			<div class="col-md-4">
+			 <h5 style="
+    font-weight: 600;">SIMILAR POSTS</h5>
+        <hr>
+			<%@articles.reverse_each do |article|%>
+				<div class="card card-quote card-indigo bg-image bg-opaque8">
+
+                  <%= image_tag article.photo.url(:medium), class: "img-responsive", style: "position:absolute; height:auto; width:100%;" %>
+					<div class="card-body text-color-white">
+						<div class="quote" style="    top: 50px;">
+							
+							<p><h4 style="font-size:12px; color:black"><%= link_to article.title, article_path(article),style: "background-color: rgba(0,0,0,0.8);     padding: 2px 6px;
+}"%></h4></p>
+							
+						</div><!--.quote-->
+						
+					</div><!--.card-body-->
+
+				</div><!--.card-->
+				<%end%>
+			</div><!--.col-md-4-->
+
+
+		

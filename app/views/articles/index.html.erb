@@ -1,0 +1,474 @@
+   <%if author_signed_in?%>
+
+    <div class="display-animation">
+ 
+      
+      <div class="col-md-7 col-xs-12" style="margin-right: 90px;">
+      
+      <h5 style="
+    font-weight: 600;
+        
+    ">TRENDING</h5>
+    <hr>
+      <%@articles.reverse_each do |article|%>
+        <div class="card card-event">
+          <div class="card-heading">
+          <%= image_tag article.photo.url(:medium), class: "img-responsive", style: "width:100%" %>
+          </div><!--.card-heading-->
+
+          <div class="card-body">
+            <div class="calendar">
+              <div class="month"><%= l article.created_at, :format => :sample %></div>
+              <div class="date" style="font-size:14px"><%= l article.created_at, :format => :sample1 %></div>
+            </div><!--.calendar-->
+            <h4><%= link_to article.title, article_path(article), style: "font-size:17px"%></h4>
+            <p><%= truncate article.body, length: 260, style: "font-size:13px" %></p>
+          </div><!--.card-body-->
+
+          <div class="card-footer">
+          <a class="btn btn-social-icon btn-facebook pull-left" style="margin-right: 10px; font-size: 11px;"><i class="fa fa-facebook"></i></a>
+           <a class="btn btn-social-icon btn-twitter pull-left" style="margin-right: 10px; font-size: 11px;"><i class="fa fa-twitter"></i></a> 
+           
+                <a class="btn btn-social-icon btn-google-plus pull-left" style="margin-right: 10px; font-size: 11px;"><i class="fa fa-google-plus"></i></a>
+                
+            <button type="button" class="btn btn-sm btn-green btn-flat pull-right"><%= link_to 'READ', article_path(article)%></button>
+          </div><!--.card-footer-->
+        </div><!--.card-->
+        <%end%>
+      </div><!--.col-md-6-->
+
+      
+<%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
+<%= submit_tag "Search" %>
+<% end %>
+            
+        <div class="col-md-4 col-xs-12">
+        <h5 style="
+    font-weight: 600;">POPULAR POSTS</h5>
+        <hr>
+        <%@articles.each do |article|%>
+          <div class="card tile card-news-more material-animate" style="height: 162px
+   ">
+            <div class="card-heading bg-image bg-opaque5">
+            <%= image_tag article.photo.url(:medium), class: "img-responsive" , style: "height:auto"%>
+              <div class="heading-content">
+               
+                <span class="headline" style="font-size:14px"><%= link_to  article.title, article_path(article), style: "background-color: rgba(0,0,0,0.5); padding: 0px 7px;
+    color: white;"%></span>
+                <button class="btn btn-floating btn-pink toggle-card-news-more"><i class="ion-android-create"></i></button>
+              </div>
+            </div><!--.card-heading-->
+            <div class="card-body">
+              <p><%=article.body%></p>
+            </div><!--.card-body-->
+          </div><!--.card-->
+          <%end%>
+        </div><!--.col-->
+      
+   <div class="col-md-4"><div class="fb-page" data-href="https://www.facebook.com/Poplify/" data-tabs="timeline" data-width="500px" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/Poplify/"><a href="https://www.facebook.com">Facebook</a></blockquote></div></div></div>  
+   <div class="col-md-4" style="margin-top: 35px;">
+  <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/Poplify" data-widget-id="710097062130352129">Tweets by @Poplify</a></div>
+
+
+  <!--<div class="layer-container">
+
+    
+
+  </div><!- .layer-container-->
+
+  <!-- BEGIN GLOBAL AND THEME VENDORS -->
+
+<!--- static homepage-->
+
+<%else%>
+
+<!--
+  * To change the hover link color and active selector border color,
+  you can combine the header div with header-*(material-colors).
+  For ex: <div class="header header-red"> or <div class="header header-teal">
+  -->
+  <div class="one-page">
+  <div class="header">
+    <div class="container">
+
+      <div class="logog">
+       <h2 style="color:#3E50B4; font-size:26px; margin-top:0px; font-weight: 400;"><a href="/articles">BLOGGER</a></h2>
+      </div><!--.logo-->
+
+      <!--
+      * data-nav-link attribute is necessary for data-anchor links.
+      * data-anchor="slide1" attribute is useful when user clicks the data-nav-link, the window moves the related slide.
+      -->
+      <div class="animated-selector">
+        <ul class="navigation">
+          <li data-anchor="slide1" data-nav-link>FEATURES</li>
+          <li data-anchor="slide2" data-nav-link>PLANS</li>
+          <li data-anchor="slide3" data-nav-link>OVERVIEW</li>
+          <li data-anchor="slide4" data-nav-link>ABOUT US</li>
+          <li data-anchor="slide5" data-nav-link>CONTACT</li>
+          <li data-anchor="slide6" data-nav-link>SIGN UP</li>
+          <li data-toggle="modal" data-target="#myModal"> SIGN IN</li>
+          <a href="authors/auth/facebook"><li> SIGN IN with fb</li></a>
+
+        </ul>
+        <div class="selector"></div>
+      </div><!--.animated-selector-->
+
+      
+
+      <div class="hamburger-btn"></div><!--.hamburger-btn-->
+
+    </div><!--.container-->
+  </div><!--.header-->
+
+  <!--
+  * Each slide divs can be combined with these classes
+
+  ** Material colors: such as bg-pink, bg-indigo, bg-teal etc.
+  ** bg-image: you just need to write inline css style in order to path to image.
+  ** bg-image-with-shadow: same for bg-image class but in this time background-gradient floats the image.
+  ** bg-pattern: same for the bg-image but in this time the pattern will be repeated for background.
+
+  * data-nav="remove" attribute hides the active navigation border when this slide in viewport.
+  -->
+  <div class="slide bg-image" data-nav="remove" style="background: url('/assets/header.jpg') fixed;">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <h1 class="text-white text-light-shadow">GET THE MOST <span style="background-color: #3E50B4;" data-typer-targets="UNIQUE, ADVANCED, ESSENTIAL">ADVANCED</span><br>ARTICLES WITH BLOGGER.</h1>
+          <p class="caption text-white text-light-shadow">BLOGGER offers lots of technology, fashion, lifestyle related articles.<br><a class="btn btn-wonderush-white" data-anchor="slide6" data-nav-link>JOIN US</a></p>
+        </div><!--.col-->
+      </div><!--.row-->
+
+      
+
+    </div><!--.container-->
+    <h5 style="color: white;
+    text-align: center;
+    position: relative;
+    top: 75px;
+    font-weight: 400;">EXPLORE MORE</h5>
+    <a class="btn btn-large btn-floating btn-indigo btn-next btn-next-center" data-anchor="slide1" data-nav-link><i class="ion-chevron-down"></i></a>
+
+  </div><!--.slide-hero-->
+
+  <!--
+  * data-nav="slide1" attribute is an identifier for data-nav-links.
+  -->
+  <div class="slide" data-nav="slide1">
+
+    <div class="container">
+
+      <div class="slide-image-horizontal hide-on-mobile" data-bottom-top="left:-200px" data-center="left:50px"><img src="/assets/bg-features (1).jpg" alt=""></div><!--.slide-image-->
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+          <h2 class="text-black">FEATURES</h2>
+          <p class="caption" style="margin-bottom:25px">Several Features Which Make You To Join <a href="/articles">BLOGGER</a>.</p>
+          <ul class="list-vertical">
+            <li>
+              <div class="list-icon text-indigo">
+                <i class="ion-ios-compose-outline"></i>
+              </div><!--.list-icon-->
+              <div class="list-info">
+                <h4 class="text-indigo">Create Articles</h4>
+                <span>On BLOGGER you can write or find articles on every topic.</span>
+              </div><!--.list-info-->
+            </li>
+            <li>
+              <div class="list-icon text-green">
+                <i class="ion-earth"></i>
+              </div><!--.list-icon-->
+              <div class="list-info">
+                <h4 class="text-green">Global</h4>
+                <span>BLOGGER community have writer from all over the country, so no need to worry about any language restrictions.</span>
+              </div><!--.list-info-->
+            </li>
+            <li>
+              <div class="list-icon text-red">
+                <i class="ion-android-wifi"></i>
+              </div><!--.list-icon-->
+              <div class="list-info">
+                <h4 class="text-red">Connect</h4>
+                <span>Connect
+with a passionate community of writers and enthusiasts.</span>
+              </div><!--.list-info-->
+            </li>
+          </ul>
+        </div><!--.col-->
+      </div><!--.row-->
+
+      <a class="btn btn-large btn-floating btn-pink btn-next btn-next-left" data-anchor="slide2" data-nav-link><i class="ion-chevron-down"></i></a>
+
+    </div><!--.container-->
+
+  </div><!--.slide-->
+
+  <div class="slide bg-light-grey" data-nav="slide2">
+
+    <div class="container">
+
+      <div class="slide-image-vertical hide-on-mobile" data-bottom-top="top:-200px" data-center-bottom="top:100px"><img src="/assets/about_video.jpg" alt=""></div><!--.slide-image-->
+
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="text-black">What can you do in Blogger?</h2>
+         
+          <ul class="list-vertical">
+            <li>
+              <div class="list-icon text-deep-purple">
+                <i class="ion-beer"></i>
+              </div><!--.list-icon-->
+              <div class="list-info">
+                <h4 class="text-deep-purple">Walk someone through your most delicious recipe 
+    .</h4>
+               
+              </div><!--.list-info-->
+            </li>
+            <li>
+              <div class="list-icon text-teal">
+                <i class="ion-chatbubbles"></i>
+              </div><!--.list-icon-->
+              <div class="list-info">
+                <h4 class="text-teal">Start a conversation about something you care about!</h4>
+                
+              </div><!--.list-info-->
+            </li>
+            <li>
+              <div class="list-icon text-amber">
+                <i class="ion-android-bicycle"></i>
+              </div><!--.list-icon-->
+              <div class="list-info">
+                <h4 class="text-amber">Bring someone along in your travels with a guide
+        </h4>
+                
+              </div><!--.list-info-->
+            </li>
+          </ul>
+        </div><!--.col-->
+      </div><!--.row-->
+
+      <a class="btn btn-large btn-floating btn-amber btn-next btn-next-right" data-anchor="slide3" data-nav-link><i class="ion-chevron-down"></i></a>
+
+    </div><!--.container-->
+  </div><!--.slide-->
+
+  <div class="slide bg-image-with-shadow" style="background-image: url('/assets/bg-overview.jpg'); " data-nav="slide3">
+    <div class="container">
+      <h3 class="text-white text-center">LETS SEE!</h3>
+      <p class="caption text-white text-center">How poploggers works on BLOGGER. How an article take place in BLOGGER.</p>
+
+      <ul class="row list-horizontal white">
+        <li class="col-sm-4" data-bottom-top="top:-50px" data-center="top:0px">
+          <div class="list-icon">
+            <i class="ion-ios-lightbulb"></i>
+          </div><!--.list-icon-->
+          <div class="list-info">
+            <h4>SOMETHING NEW POPS</h4>
+            <span>Everytime when something new pops in users mind, they login to BLOGGER.</span>
+          </div><!--.list-info-->
+        </li>
+        <li class="col-sm-4" data-bottom-top="top:-50px" data-center="top:0px">
+          <div class="list-icon">
+            <i class="ion-ios-compose-outline"></i>
+          </div><!--.list-icon-->
+          <div class="list-info">
+            <h4>WRITE IT</h4>
+            <span>Then users post that as a article for other peoples to see it, read it and review it.</span>
+          </div><!--.list-info-->
+        </li>
+        <li class="col-sm-4" data-bottom-top="top:-50px" data-center="top:0px">
+          <div class="list-icon">
+            <i class="ion-chatboxes"></i>
+          </div><!--.list-icon-->
+          <div class="list-info">
+            <h4>INTERACT TO OTHERS</h4>
+            <span>Now other user read that article and if they like article, interaction begin between them and they get another new friend!</span>
+          </div><!--.list-info-->
+        </li>
+      </ul>
+
+      <a class="btn btn-large btn-floating btn-teal btn-next btn-next-center" data-anchor="slide4" data-nav-link><i class="ion-chevron-down"></i></a>
+
+    </div><!--.container-->
+  </div><!--.slide-->
+
+  <div class="slide bg-pattern" style="background-image: url('/assets/patterns/sativa.png');" data-nav="slide4">
+    <div class="container">
+      <h3 class="text-black text-center">ABOUT US</h3>
+      <p class="caption text-center">Here are some peoples, who give their full effort in making BLOGGER and giving their best.</p>
+
+      <div class="row transform-bug">
+        <div class="col-md-3 col-sm-4 col-xs-12" data-bottom-top="bottom:-100px" data-center="bottom:0px">
+          <div class="card card-user-new">
+            <img src="/assets/faces/large/1.jpg" class="member-image" alt="">
+            <div class="card-body">
+              <h5>Kathryn Hoffman</h5>
+              <h6>CEO</h6>
+              <ul class="social-links list-inline">
+                <li><a href="#"><i class="fa fa-github"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              </ul>
+            </div><!--.card-body-->
+          </div><!--.card-->
+        </div><!--.col-md-3-->
+
+        <div class="col-md-3 col-sm-4 col-xs-12" data-bottom-top="bottom:-200px" data-center="bottom:0px">
+          <div class="card card-user-new">
+            <img src="/assets/faces/large/6.jpg" class="member-image" alt="">
+            <div class="card-body">
+              <h5>James Ramos</h5>
+              <h6>PROJECT MANAGER</h6>
+              <ul class="social-links list-inline">
+                <li><a href="#"><i class="fa fa-github"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              </ul>
+            </div><!--.card-body-->
+          </div><!--.card-->
+        </div><!--.col-md-3-->
+
+        <div class="col-md-3 col-sm-4 col-xs-12" data-bottom-top="bottom:-200px" data-center="bottom:0px">
+          <div class="card card-user-new">
+            <img src="/assets/faces/large/7.jpg" class="member-image" alt="">
+            <div class="card-body">
+              <h5>William Romero</h5>
+              <h6>WEB DEVELOPER </h6>
+              <ul class="social-links list-inline">
+                <li><a href="#"><i class="fa fa-github"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              </ul>
+            </div><!--.card-body-->
+          </div><!--.card-->
+        </div><!--.col-md-3-->
+
+        <div class="col-md-3 col-sm-4 col-xs-12" data-bottom-top="bottom:-100px" data-center="bottom:0px">
+          <div class="card card-user-new">
+            <img src="/assets/faces/large/4.jpg" class="member-image" alt="">
+            <div class="card-body">
+              <h5>Justin Bowman</h5>
+              <h6>Marketing Representative</h6>
+              <ul class="social-links list-inline">
+                <li><a href="#"><i class="fa fa-github"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              </ul>
+            </div><!--.card-body-->
+          </div><!--.card-->
+        </div><!--.col-md-3-->
+
+      </div><!--.row-->
+ <a class="btn btn-large btn-floating btn-indigo btn-next btn-next-center" data-anchor="slide5" data-nav-link><i class="ion-chevron-down"></i></a>
+    </div><!--.container-->
+
+  </div><!--.slide-->
+
+  <div class="slide" data-nav="slide5">
+
+    <div class="container">
+      <h3 class="text-black text-center">CONTACT</h3>
+      <p class="caption text-center">We will be glad if you write us.</p>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <div class="form-group">
+            <div class="inputer inputer-teal floating-label">
+              <div class="input-wrapper">
+                <input type="text" name="" class="form-control">
+                <label>First name</label>
+              </div><!--.input-wrapper-->
+            </div><!--.inputer-->
+          </div><!--.form-group-->
+        </div><!--.col-->
+        <div class="col-md-6 col-xs-12">
+          <div class="form-group">
+            <div class="inputer inputer-teal floating-label">
+              <div class="input-wrapper">
+                <input type="text" name="" class="form-control">
+                <label>Last name</label>
+              </div><!--.input-wrapper-->
+            </div><!--.inputer-->
+          </div><!--.form-group-->
+        </div><!--.col-->
+      </div><!--.row-->
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="inputer inputer-teal floating-label">
+              <div class="input-wrapper">
+                <textarea class="form-control js-auto-size" rows="1"></textarea>
+                <label>Your message</label>
+              </div>
+            </div>
+          </div><!--.form-group-->
+        </div><!--.col-->
+      </div><!--.row-->
+
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-teal pull-right">SEND</button>
+        </div><!--.col-->
+      </div><!--.row-->
+<a class="btn btn-large btn-floating btn-amber btn-next btn-next-right" data-anchor="slide6" data-nav-link><i class="ion-chevron-down"></i></a>
+    </div><!--.container-->
+
+  </div><!--.slide-->
+  <div class="slide" style="background-color:#F7F8F8" data-nav="slide6">
+
+    <div class="container">
+      <h3 class="text-black text-center">SIGN UP</h3>
+      <p class="caption text-center">It's free and always will be. </p>
+        <div class="col-md-7 col-xs-12">
+      <p class="signp" style="margin-bottom:25px">WHY JOIN BLOGGER <span data-typer-targets="FAMILY, COMMUNITY">FAMILY.</p>
+     
+      <ul class="sign_up_box ">
+        <li>
+          Access hundreds of articles to read every time
+        </li>
+        <li>
+          Book as many new articles as you like for a flat fee
+        </li>
+        <li>
+          Enjoy a variety of experiences, articles and events
+        </li>
+        <li>
+          Meet new people and share great times
+        </li>
+        <li>
+          Not the commitment type? Cancel account anytime
+        </li>
+      </ul>
+</div><!--.col-->
+
+<div class="col-md-5">
+<div class="row">
+<%= render '/devise/registrations/new'%>
+       </div>
+        </div><!--.col-->
+     
+
+    </div><!--.container-->
+
+  </div><!--.slide-->
+
+  <div class="footer bg-black">
+    <div class="container">
+
+      <ul class="social-list">
+        <li><a href="javascript:;" class="facebook"><i class="ion-social-facebook"></i></a></li>
+        <li><a href="javascript:;" class="twitter"><i class="ion-social-twitter"></i></a></li>
+        <li><a href="javascript:;" class="pinterest"><i class="ion-social-github"></i></a></li>
+      </ul>
+
+      <div class="copyright v-text">BLOGGER &copy; 2015</div>
+
+    </div><!--.container-->
+  </div><!--.footer-->
+  </div>
+
+  <%end%>
